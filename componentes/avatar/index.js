@@ -1,8 +1,9 @@
 import avatarImg from '../../public/imagens/avatar.svg'
-export default function Avatar ({src}) {
+
+export default function Avatar({src}) {
     const getAvatar = () => {
         if(src && src !== 'undefined'){
-            return src
+            return src;
         }
 
         return avatarImg.src;
@@ -12,7 +13,6 @@ export default function Avatar ({src}) {
         src={getAvatar()}
         alt= 'Avatar'
         className= 'avatar'
-
         />
     )
 }
