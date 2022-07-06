@@ -4,32 +4,32 @@ import Postagem from "./Postagem";
 
 const feedService = new FeedService();
 
-export function Feed ({ usuarioLogado }) {
-    const [listaDePostagens, setListaDePostagens] = useState([])
+export default function Feed({ usuarioLogado, usuarioPerfil }) {
+    const [listaDePostagens, setListaDePostagens] = useState([]);
 
     useEffect(async () => {
         const { data } = await feedService.carregarPostagens();
-        console.log(data);
 
-        setListaDePostagens([
+        const postagensFormatadas = data.map((postagem) => (
             {
-                id: '1',
+                id: postagem._id,
                 usuario: {
-                    id: '1',
-                    nome: 'Gabriel',
-                    avatar: null
+                    id: postagem.userId,
+                    nome: postagem.usuario.nome,
+                    avatar: postagem.usuario.avatar
                 },
-                fotoDoPost: 'https://a-static.mlcdn.com.br/800x560/papel-de-parede-personalizado-rei-leao-final-decor/viniciushenriquedresserbonometto/5057p/068513b7b100e51ebe0503fffe73dcdc.jpg',
-                descricao: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make',
-                curtidas: [],
-                comentarios: [
-                    {
-                        nome: 'Fulano',
-                        mensagem: 'Muito legal'
-                    }
-                ]
+                fotoDoPost: postagem.foto,
+                descricao: postagem.descricao,
+                curtidas: postagem.likes,
+                comentarios: postagem.comentarios.map(c => ({
+                    nome: c.nome,
+                    mensagem: c.comentario
+                }))
             }
-        ])
+        ))
+
+        setListaDePostagens(postagensFormatadas);
+
     }, [usuarioLogado])
     
     return (
