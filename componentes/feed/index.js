@@ -4,12 +4,11 @@ import Postagem from "./Postagem";
 
 const feedService = new FeedService();
 
-export default function Feed({ usuarioLogado, usuarioPerfil }) {
-    const [listaDePostagens, setListaDePostagens] = useState([]);
+export function Feed ({ usuarioLogado }) {
+    const [listaDePostagens, setListaDePostagens] = useState([])
 
-    useEffect(async () => {
+    useEffect(async() => {
         const { data } = await feedService.carregarPostagens();
-
         const postagensFormatadas = data.map((postagem) => (
             {
                 id: postagem._id,
@@ -29,7 +28,6 @@ export default function Feed({ usuarioLogado, usuarioPerfil }) {
         ))
 
         setListaDePostagens(postagensFormatadas);
-
     }, [usuarioLogado])
     
     return (
