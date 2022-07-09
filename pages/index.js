@@ -13,7 +13,7 @@ export default function Index() {
     );
   }, []);
 
-  if (estaAutenticado === null){
+  if (estaAutenticado === null) {
     return null;
   }
 

@@ -14,7 +14,7 @@ export default function comAutorizacao(Componente) {
                 return null;
             }
 
-            const usuarioLogado = usuarioService.obterInformacoesDoUsuarioLogado()
+            const usuarioLogado = usuarioService.obterInformacoesDoUsuarioLogado();
 
             return (
                 <>

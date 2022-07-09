@@ -113,14 +113,15 @@
 
             .containerFazerComentario{
                 margin-top: 12px;
+
                 .btnPublicacao {
                     background-color: transparent;
                     color: $corPrimaria;
                     outline: none;
                     border: none;
+                    cursor: pointer;
                     font-size: 12px;
                     font-family: $fontBold;
-                    cursor: pointer;
                 }
             }
         }
