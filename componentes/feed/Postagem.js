@@ -69,7 +69,7 @@ export default function Postagem({
         }
     }
 
-    const usurioLogadoCurtiuPostagem = () => {
+    const usuarioLogadoCurtiuPostagem = () => {
         return curtidasPostagem.includes(usuarioLogado.id);
     }
 
@@ -77,7 +77,7 @@ export default function Postagem({
         try {
             await feedService.alterarCurtida(id);
             const estaCurtido = curtidasPostagem.includes(usuarioLogado.id);
-            if (usurioLogadoCurtiuPostagem()) {
+            if (usuarioLogadoCurtiuPostagem()) {
                 setCurtidasPostagem(
                     curtidasPostagem.filter(idUsuarioQueCurtiu => idUsuarioQueCurtiu !== usuarioLogado.id)
                 );
@@ -93,9 +93,9 @@ export default function Postagem({
     }
 
     const obterImagemCurtida = () => {
-        return usurioLogadoCurtiuPostagem()
-        ? imgCurtido
-        : imgCurtir;
+        return usuarioLogadoCurtiuPostagem()
+            ? imgCurtido
+            : imgCurtir;
     }
 
     return (
@@ -122,7 +122,7 @@ export default function Postagem({
                     />
 
                     <Image
-                        src={obterImagemComentario}
+                        src={obterImagemComentario()}
                         alt='icone comentar'
                         width={20}
                         height={20}
@@ -139,7 +139,7 @@ export default function Postagem({
                     <p className="descricao">
                         {obterDescricao()}
                         {descricaoMaiorQueLimite() && (
-                            <span 
+                            <span
                                 onClick={exibirDescricaoCompleta}
                                 className="exibirDescricaoCompleta">
                                 mais
@@ -147,7 +147,8 @@ export default function Postagem({
                         )}
                     </p>
                 </div>
-                <div className="comentarioDaPublicacao">
+
+                <div className="comentariosDaPublicacao">
                     {comentariosPostagem.map((comentario, i) => (
                         <div className="comentario" key={i}>
                             <strong className="nomeUsuario">{comentario.nome}</strong>
@@ -157,9 +158,9 @@ export default function Postagem({
                 </div>
             </div>
 
-            {deveExibirSecaoParaComentar && 
+            {deveExibirSecaoParaComentar &&
                 <FazerComentario comentar={comentar} usuarioLogado={usuarioLogado} />
             }
         </div>
-    )
+    );
 }

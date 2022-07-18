@@ -7,29 +7,26 @@ const feedService = new FeedService();
 export function Feed({ usuarioLogado }) {
     const [listaDePostagens, setListaDePostagens] = useState([]);
 
-    async function postFeed(){
+    useEffect(async () => {
         const { data } = await feedService.carregarPostagens();
-            const postagensFormatadas = data.map((postagem) => (
-                {
-                    id: postagem._id,
-                    usuario: {
-                        id: postagem.userId,
-                        nome: postagem.usuario.nome,
-                        avatar: postagem.usuario.avatar
-                    },
-                    fotoDoPost: postagem.foto,
-                    descricao: postagem.descricao,
-                    curtidas: postagem.likes,
-                    comentarios: postagem.comentarios.map(c => ({
-                        nome: c.nome,
-                        mensagem: c.comentario
-                    }))
-                }
-            ));
-            setListaDePostagens(postagensFormatadas)
-    }
-    useEffect(() => {
-        postFeed();
+        const postagensFormatadas = data.map((postagem) => (
+            {
+                id: postagem._id,
+                usuario: {
+                    id: postagem.userId,
+                    nome: postagem.usuario.nome,
+                    avatar: postagem.usuario.avatar
+                },
+                fotoDoPost: postagem.foto,
+                descricao: postagem.descricao,
+                curtidas: postagem.likes,
+                comentarios: postagem.comentarios.map(c => ({
+                    nome: c.nome,
+                    mensagem: c.comentario
+                }))
+            }
+        ));
+    setListaDePostagens(postagensFormatadas)
     }, [usuarioLogado])
 
     return (
