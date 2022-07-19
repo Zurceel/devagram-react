@@ -2,7 +2,7 @@ import { useState } from "react";
 import Avatar from "../avatar";
 
 export function FazerComentario({ usuarioLogado, comentar }) {
-    const [linas, setLinhas] = useState(1);
+    const [linhas, setLinhas] = useState(1);
     const [comentario, setComentario] = useState('')
     
     const aoDigitarComentario = (e) => {
@@ -12,23 +12,23 @@ export function FazerComentario({ usuarioLogado, comentar }) {
     }
 
     const aoPressionarQualquerTecla = (e) => {
-        if (e.key === 'Enter'){
-            fazerComentario
+        if (e.key === 'Enter') {
+            fazerComentario();
         }
     }
 
-    const fazerComentario = () => {
+    const fazerComentario =  () => {
         if(comentario.trim().length === 0 || !comentar){
             return;
         }
-
+            
         comentar(comentario);
     }
     return (
         <div className="containerFazerComentario">
             <Avatar src={usuarioLogado.avatar} />
             <textarea
-                rows={1}
+                rows={linhas}
                 onChange={aoDigitarComentario}
                 onKeyDown={aoPressionarQualquerTecla}
                 autoFocus={true}

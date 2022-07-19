@@ -52,7 +52,7 @@ export default function Postagem({
     }
 
     const comentar = async (comentario) => {
-        console.log('fazer comentário')
+        console.log('fazer comentário');
 
         try {
             await feedService.adicionarComentario(id, comentario);
@@ -76,7 +76,6 @@ export default function Postagem({
     const alterarCurtida = async () => {
         try {
             await feedService.alterarCurtida(id);
-            const estaCurtido = curtidasPostagem.includes(usuarioLogado.id);
             if (usuarioLogadoCurtiuPostagem()) {
                 setCurtidasPostagem(
                     curtidasPostagem.filter(idUsuarioQueCurtiu => idUsuarioQueCurtiu !== usuarioLogado.id)
@@ -85,7 +84,7 @@ export default function Postagem({
                 setCurtidasPostagem([
                     ...curtidasPostagem,
                     usuarioLogado.id
-                ])
+                ]);
             }
         } catch (e) {
             alert(`Erro ao alterar a curtida!` + (e?.response?.data?.erro || ''));
