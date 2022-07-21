@@ -96,22 +96,28 @@
 
     @media screen and (min-width: $desktopBreakpoint) {
         padding-top: 8px;
+        margin-top: 0px;
 
         .postagem {
+            .cabecalhoPostagem {
+                cursor: pointer;
+
+            }
+
             .avatar {
                 width: 42px;
                 height: 42px;
             }
 
-            .rodapeDaPostagem{
-                .acoesDaPostagem{
-                    > span {
+            .rodapeDaPostagem {
+                .acoesDaPostagem {
+                    >span {
                         cursor: pointer;
                     }
                 }
             }
 
-            .containerFazerComentario{
+            .containerFazerComentario {
                 margin-top: 12px;
 
                 .btnPublicacao {
