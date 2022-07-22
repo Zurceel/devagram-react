@@ -14,7 +14,11 @@ function Perfil({ usuarioLogado }) {
 
     const obterPerfil = async (idUsuario) => {
         try {
-            const { data } = await usuarioService.obterPerfil(idUsuario)
+            const { data } = await usuarioService.obterPerfil(
+                idUsuario === 'eu'
+                    ? usuarioLogado.id
+                    : idUsuario
+                )
             return data;
         } catch (error) {
             alert(`Erro ao obter o perfil do usuario!`)
@@ -26,7 +30,7 @@ function Perfil({ usuarioLogado }) {
             return;
         }
         const dadosPerfil = await obterPerfil(router.query.id);
-        setUsuario(dadosPerfil)
+        setUsuario(dadosPerfil);
 
         console.log(dadosPerfil);
     }, [router.query.id]);
