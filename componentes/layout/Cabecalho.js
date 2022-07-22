@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { useRouter } from "next/router";
-import logoHorizontalImg from '../../public/imagens/logoHorizontal.svg'
-import imagemLupa from '../../public/imagens/lupa.svg'
+import logoHorizontalImg from '../../public/imagens/logoHorizontal.svg';
+import imagemLupa from '../../public/imagens/lupa.svg';
 import Navegacao from './Navegacao';
 import ResultadoPesquisa from './ResultadoPesquisa';
 import UsuarioService from '../../services/UsuarioService';
+import { useRouter } from 'next/router';
 
 const usuarioService = new UsuarioService();
 
@@ -15,36 +15,36 @@ export default function Cabecalho() {
     const router = useRouter();
 
     let cabecalhoClassName = '';
-    if(window && window.location.pathname !== '/'){
-        cabecalhoClassName = 'desktop'
+    if (window && window.location.pathname !== '/') {
+        cabecalhoClassName = 'desktop';
     }
-    
 
     const aoPesquisar = async (e) => {
-        setTermoPesquisado(e.target.value)
+        setTermoPesquisado(e.target.value);
         setResultadoPesquisa([]);
 
-        if (e.target.value.length < 3){
+        if (e.target.value.length < 3) {
             return;
         }
 
         try {
             const { data } = await usuarioService.pesquisar(termoPesquisado);
-            setResultadoPesquisa(data)
-        } catch (error) {
-            alert('Erro ao pesquisar usuário.' + error?.response?.data?.erro)
+            setResultadoPesquisa(data);
+        } catch (e) {
+            alert('Erro ao pesquisar usuario. ' + e?.response?.data?.erro);
         }
-        
     }
+
     const aoClicarResultadoPesquisa = (id) => {
         setResultadoPesquisa([]);
         setTermoPesquisado('');
-        router.push(`/perfil/${id}`)
+        router.push(`/perfil/${id}`);
     }
 
     const redirecionarParaHome = () => {
-        router.push('/')
+        router.push('/');
     }
+
     return (
         <header className={`cabecalhoPrincipal ${cabecalhoClassName}`}>
             <div className='conteudoCabecalhoPrincipal'>
@@ -56,11 +56,12 @@ export default function Cabecalho() {
                         layout='fill'
                     />
                 </div>
+
                 <div className='barraPesquisa'>
                     <div className='containerImagemLupa'>
                         <Image
                             src={imagemLupa}
-                            alt='Icone Lupa'
+                            alt='Icone lupa'
                             layout='fill'
                         />
                     </div>
@@ -71,8 +72,8 @@ export default function Cabecalho() {
                         value={termoPesquisado}
                         onChange={aoPesquisar}
                     />
-
                 </div>
+
                 <Navegacao className='desktop' />
             </div>
 
