@@ -2,10 +2,38 @@ import imgSetaEsquerda from '../../public/imagens/setaEsquerda.svg';
 import CabecalhoComAcoes from '../../componentes/cabecalhoComAcoes';
 import Avatar from '../avatar';
 import Botao from '../botao';
+import { useEffect, useState } from 'react';
 
 export default function CabecalhoPerfil({
     usuario
 }) {
+
+    const [estaSeguindoOUsuario, setEstaSeguindoOUsuario] = useState(false);
+
+    useEffect(() => {
+        if (!usuario){
+            return;
+        }
+
+        setEstaSeguindoOUsuario(usuario.segueEsseUsuario);
+    }, [usuario]);
+
+    const obterTextoBotaoSeguir = () => {
+        if (estaSeguindoOUsuario) {
+            return 'Deixar de Seguir';
+        }
+
+        return 'Seguir'
+    }
+
+    const obterCorDoBotaoSeguir = () => {
+        if (estaSeguindoOUsuario) {
+            return 'invertido';
+        }
+
+        return 'primaria';
+    }
+
     return (
         <div className='cabecalhoPerfil largura30pctDesktop'>
             <CabecalhoComAcoes
@@ -36,8 +64,8 @@ export default function CabecalhoPerfil({
                     </div>
 
                     <Botao 
-                        texto={'Seguir'}
-                        cor='primaria'
+                        texto={obterTextoBotaoSeguir()}
+                        cor={obterCorDoBotaoSeguir()}
                     />
                 </div>
             </div>
