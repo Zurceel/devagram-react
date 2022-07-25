@@ -12,12 +12,24 @@ export default class UsuarioService extends HttpService {
        localStorage.setItem('id', usuario.data._id);
 
        if (usuario.data.avatar) {
-        localStorage.setItem("avatar", usuario.data.avatar)
+        localStorage.setItem("avatar", usuario.data.avatar);
        }
     }
 
+    async logout () {
+        localStorage.removeItem("nome")
+        localStorage.removeItem("email");
+        localStorage.removeItem("token");
+        localStorage.removeItem("id");
+        localStorage.removeItem("avatar");
+    }
+
     async cadastro(dados) {
-        return this.post('/cadastro', dados)
+        return this.post('/cadastro', dados);
+    }
+
+    async atualizarPerfil(dados) {
+        return this.put(`/usuario`, dados);
     }
 
     estaAutenticado() {
@@ -25,7 +37,7 @@ export default class UsuarioService extends HttpService {
     }
 
     async pesquisar(termoDaPesquisa) {
-        return this.get('/pesquisa?filtro=' + termoDaPesquisa)
+        return this.get('/pesquisa?filtro=' + termoDaPesquisa);
     }
 
     async obterPerfil(idUsuario) {

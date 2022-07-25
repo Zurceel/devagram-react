@@ -5,7 +5,9 @@
   font-size: 14px;
 }
 
-html, body, #__next {
+html,
+body,
+#__next {
   height: 100%;
   margin: 0;
 
@@ -33,7 +35,7 @@ input {
   &::-ms-input-placeholder {
     color: $cinza2
   }
-  
+
 }
 
 .desktop {
@@ -89,6 +91,18 @@ body {
   @media screen and (min-width: $desktopBreakpoint) {
     width: 30%;
     margin: auto;
+  }
+}
+
+.linhaDivisoria {
+  margin: 0;
+  border: none;
+  background-color: $cinza1;
+  height: 1px;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    margin: 0 auto;
+    width: 94%;
   }
 }
 

@@ -1,10 +1,12 @@
 import imgSetaEsquerda from '../../public/imagens/setaEsquerda.svg';
+import imgLogout from '../../public/imagens/logout.svg';
 import CabecalhoComAcoes from '../../componentes/cabecalhoComAcoes';
 import Avatar from '../avatar';
 import Botao from '../botao';
 import { useEffect, useState } from 'react';
 import UsuarioService from '../../services/UsuarioService';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
+import Image from 'next/image'
 
 const usuarioService = new UsuarioService()
 
@@ -18,7 +20,7 @@ export default function CabecalhoPerfil({
     const router = useRouter();
 
     useEffect(() => {
-        if (!usuario){
+        if (!usuario) {
             return;
         }
 
@@ -26,8 +28,8 @@ export default function CabecalhoPerfil({
         setQuantidadeSeguidores(usuario.seguidores)
     }, [usuario]);
 
-    const obterTextoBotaoSeguir = () => {
-        if (estaNoPerfilPessoal){
+    const obterTextoBotaoPrincipal = () => {
+        if (estaNoPerfilPessoal) {
             return 'Editar perfil';
         }
 
@@ -38,7 +40,7 @@ export default function CabecalhoPerfil({
         return 'Seguir'
     }
 
-    const obterCorDoBotaoSeguir = () => {
+    const obterCorDoBotaoPrincipal = () => {
         if (estaSeguindoOUsuario || estaNoPerfilPessoal) {
             return 'invertido';
         }
@@ -46,13 +48,17 @@ export default function CabecalhoPerfil({
         return 'primaria';
     }
 
-    const manipularCliqueBotaoSeguir = async () => {
+    const manipularCliqueBotaoPrincipal = async () => {
+        if (estaNoPerfilPessoal) {
+            return router.push('/perfil/editar');
+        }
+
         try {
             await usuarioService.alternarSeguir(usuario._id);
             setQuantidadeSeguidores(
-                estaSeguindoOUsuario 
-                ? (quantidadeSeguidores - 1)
-                : (quantidadeSeguidores + 1) 
+                estaSeguindoOUsuario
+                    ? (quantidadeSeguidores - 1)
+                    : (quantidadeSeguidores + 1)
             );
             setEstaSeguindoOUsuario(!estaSeguindoOUsuario)
         } catch (error) {
@@ -64,15 +70,37 @@ export default function CabecalhoPerfil({
         router.back();
     }
 
+    const logout = () =>{
+        usuarioService.logout();
+        router.push('/')
+    }
+
+    const obterelemnetoDireitaCabecalho = () => {
+        if (estaNoPerfilPessoal) {
+            return (
+                <Image
+                        src={imgLogout}
+                        alt='incone logout'
+                        onClick={logout}
+                        width={23}
+                        height={23}
+                    />   
+            )
+        }
+
+        return null;
+    }
+
     return (
         <div className='cabecalhoPerfil largura30pctDesktop'>
             <CabecalhoComAcoes
-                    iconeEsquerda={imgSetaEsquerda}
-                    aoCliarAcaoEsquerda={aoClicarSetaEsquerda}
-                    titulo={usuario.nome}
+                iconeEsquerda={estaNoPerfilPessoal ? null : imgSetaEsquerda}
+                aoCliarAcaoEsquerda={aoClicarSetaEsquerda}
+                titulo={usuario.nome}
+                elementoDireita={obterelemnetoDireitaCabecalho()}
             />
 
-            <hr className='bordaCabecalhoPerfil' />
+            <hr className='linhaDivisoria' />
 
             <div className='statusPerfil'>
                 <Avatar src={usuario.avatar} />
@@ -94,10 +122,10 @@ export default function CabecalhoPerfil({
                         </div>
                     </div>
 
-                    <Botao 
-                        texto={obterTextoBotaoSeguir()}
-                        cor={obterCorDoBotaoSeguir()}
-                        manipularClique={manipularCliqueBotaoSeguir}
+                    <Botao
+                        texto={obterTextoBotaoPrincipal()}
+                        cor={obterCorDoBotaoPrincipal()}
+                        manipularClique={manipularCliqueBotaoPrincipal}
                     />
                 </div>
             </div>

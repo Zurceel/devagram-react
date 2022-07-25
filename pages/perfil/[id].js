@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import Feed from '../../../componentes/feed';
+import Feed from '../../componentes/feed';
 import { useRouter } from 'next/router';
-import comAutorizacao from '../../../hoc/comAutorizacao';
-import CabecalhoPerfil from '../../../componentes/cabecalhoPerfil';
-import UsuarioService from '../../../services/UsuarioService';
-import resultadoPesquisa from '../../../componentes/layout/ResultadoPesquisa';
+import comAutorizacao from '../../hoc/comAutorizacao';
+import CabecalhoPerfil from '../../componentes/cabecalhoPerfil';
+import UsuarioService from '../../services/UsuarioService';
+import resultadoPesquisa from '../../componentes/layout/ResultadoPesquisa';
 
 const usuarioService = new UsuarioService();
 
@@ -25,6 +25,9 @@ function Perfil({ usuarioLogado }) {
         }
     }
 
+    const estaNoPerfilPessoal = () => {
+        return router.query.id === 'eu';
+    }
     useEffect(async () => {
         if (!router.query.id) {
             return;
@@ -39,6 +42,7 @@ function Perfil({ usuarioLogado }) {
             <CabecalhoPerfil
                 usuarioLogado={usuarioLogado}
                 usuario={usuario}
+                estaNoPerfilPessoal={estaNoPerfilPessoal()}
             />
             <Feed
                 usuarioLogado={usuarioLogado}
