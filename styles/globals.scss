@@ -19,7 +19,7 @@ body,
 }
 
 .oculto {
-  display: none
+  display: none !important
 }
 
 input {
@@ -117,3 +117,4 @@ body {
 @import '../componentes/cabecalhoComAcoes/cabecalhoComAcoes.scss';
 @import '../pages/perfil/perfil.scss';
 @import '../pages/publicacao/publicacao.scss';
+@import '../componentes/loading/loading.scss';
