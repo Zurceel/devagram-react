@@ -1,34 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Devagram 
 
-## Getting Started
+Projeto desenvolvido para a apresentação do React.Js e next na formação Devaria 2022. 
 
-First, run the development server:
+### Teclogias Utilizadas 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- React.Js 17.0.2
+- Next.Js 12.1.0
+- Node.Js 16.15.0
+- Sass 1.52.3
+- Axios 0.26.0
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Configuração do Ambiente de desenvolvimento 
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clonar o repositório `git clone <url_git>`
+1. Fazer uma cópia do Arquivo `.env.example` e renomear o novo arquivo de `.env.local`
+1. Configurar as variáveis de ambiente no `.env.local`
+1. Instale as dependências do projeto `npm i`
+1. Execute o comando `npm run dev` para subir a aplicação
